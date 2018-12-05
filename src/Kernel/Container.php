@@ -10,6 +10,9 @@
 namespace EaseBaidu\Kernel;
 
 use EaseBaidu\Kernel\Providers\ConfigServiceProvider;
+use EaseBaidu\Kernel\Providers\HttpClientServiceProviders;
+use EaseBaidu\Kernel\Providers\LogServiceProvider;
+use EaseBaidu\Kernel\Providers\RequestServiceProvider;
 use Pimple\Container as ServiceContainer;
 
 class Container extends ServiceContainer
@@ -57,6 +60,9 @@ class Container extends ServiceContainer
     {
         return array_merge([
             ConfigServiceProvider::class,
+            RequestServiceProvider::class,
+            HttpClientServiceProviders::class,
+            LogServiceProvider::class,
         ], $this->providers);
     }
 
@@ -110,7 +116,7 @@ class Container extends ServiceContainer
     public function registerProviders(array $providers)
     {
         foreach ($providers as $provider) {
-            parent::register($provider);
+            parent::register(new $provider());
         }
     }
 }

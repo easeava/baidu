@@ -11,13 +11,13 @@
 
 namespace EaseBaidu\Kernel;
 
-use Illuminate\Support\Collection;
+use Illuminate\Config\Repository;
 
 /**
  * Class Config
  * @package EaseBaidu\Kernel
  */
-class Config extends Collection
+class Config extends Repository
 {
 
 }

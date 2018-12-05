@@ -14,8 +14,9 @@ namespace EaseBaidu\Kernel\Providers;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Session;
 
-class RequestProvider implements ServiceProviderInterface
+class RequestServiceProvider implements ServiceProviderInterface
 {
 
     /**
@@ -29,7 +30,10 @@ class RequestProvider implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         $pimple['request'] = function () {
-            return Request::createFromGlobals();
+            $request = Request::createFromGlobals();
+            $request->setSession(new Session());
+
+            return $request;
         };
     }
 }

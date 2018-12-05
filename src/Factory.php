@@ -21,7 +21,7 @@ class Factory
     public static function make($name, array $config)
     {
         $namespace = Str::studly($name);
-        $service = sprintf('\\EaseBaiu\\Service\\%s\\Application', $namespace);
+        $service = sprintf('\\EaseBaidu\\Service\\%s\\Application', $namespace);
 
         return new $service($config);
     }

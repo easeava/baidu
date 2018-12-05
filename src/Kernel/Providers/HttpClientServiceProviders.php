@@ -15,7 +15,7 @@ use GuzzleHttp\Client;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
-class HttpClientProviders implements ServiceProviderInterface
+class HttpClientServiceProviders implements ServiceProviderInterface
 {
 
     /**
@@ -33,7 +33,9 @@ class HttpClientProviders implements ServiceProviderInterface
          * @return Client
          */
         $pimple['http_client'] = function ($app) {
-            /** @var \EaseBaidu\Kernel\Container $app */
+            /**
+             * @var \EaseBaidu\Kernel\Container $app
+             */
             return new Client($app['config']->get('http', []));
         };
     }
