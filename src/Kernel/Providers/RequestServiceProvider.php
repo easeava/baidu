@@ -30,10 +30,7 @@ class RequestServiceProvider implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         $pimple['request'] = function () {
-            $request = Request::createFromGlobals();
-            $request->setSession(new Session());
-
-            return $request;
+            return Request::createFromGlobals();
         };
     }
 }
