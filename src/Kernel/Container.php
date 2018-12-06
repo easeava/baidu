@@ -75,7 +75,7 @@ class Container extends ServiceContainer
             // http://docs.guzzlephp.org/en/stable/request-options.html
             'http' => [
                 'timeout' => 30.0,
-                'base_uri' => 'https://api.weixin.qq.com/',
+                'base_uri' => 'https://openapi.baidu.com/',
             ],
         ];
 
