@@ -11,6 +11,7 @@
 
 namespace EaseBaidu\Kernel\Providers;
 
+use EaseBaidu\Kernel\Log\LogManager;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 
@@ -32,8 +33,7 @@ class LogServiceProvider implements ServiceProviderInterface
          */
         $pimple['logger'] = $pimple['log'] = function ($app) {
             $config = $this->formatLogConfig($app);
-
-            if (!empty($config)) {
+            if (! empty($config)) {
                 $app->rebind('config', $app['config']->merge($config));
             }
 
@@ -43,7 +43,7 @@ class LogServiceProvider implements ServiceProviderInterface
 
     public function formatLogConfig($app)
     {
-        if (!empty($app['config']->get('log.channels'))) {
+        if (! empty($app['config']->get('log.channels'))) {
             return $app['config']->get('log');
         }
 

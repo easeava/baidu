@@ -15,5 +15,6 @@ class Application extends Container
 {
     protected $providers = [
         OAuth\ServiceProvider::class,
+        Server\ServiceProvider::class,
     ];
 }

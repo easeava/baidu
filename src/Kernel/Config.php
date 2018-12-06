@@ -11,13 +11,32 @@
 
 namespace EaseBaidu\Kernel;
 
-use Illuminate\Config\Repository;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 /**
  * Class Config
  * @package EaseBaidu\Kernel
  */
-class Config extends Repository
+class Config extends Collection
 {
+    public function get($key, $default = null)
+    {
+        return Arr::get($this->items, $key, $default);
+    }
 
+    public function has($key)
+    {
+        return ! is_null(Arr::get($this->items, $key));
+    }
+
+    public function offsetExists($key)
+    {
+        return $this->has($key);
+    }
+
+    public function offsetGet($key)
+    {
+        return $this->offsetExists($key) ? $this->get($key) : null;
+    }
 }

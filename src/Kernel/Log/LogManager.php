@@ -82,9 +82,9 @@ class LogManager implements LoggerInterface
     /**
      * Get a log channel instance.
      *
-     * @param string|null $channel
-     *
-     * @return mixed
+     * @param null $channel
+     * @return mixed|Monolog|LoggerInterface
+     * @throws \Exception
      */
     public function channel($channel = null)
     {
@@ -94,9 +94,9 @@ class LogManager implements LoggerInterface
     /**
      * Get a log driver instance.
      *
-     * @param string|null $driver
-     *
-     * @return mixed
+     * @param null $driver
+     * @return mixed|Monolog|LoggerInterface
+     * @throws \Exception
      */
     public function driver($driver = null)
     {
@@ -106,9 +106,9 @@ class LogManager implements LoggerInterface
     /**
      * Attempt to get the log from the local cache.
      *
-     * @param string $name
-     *
-     * @return \Psr\Log\LoggerInterface
+     * @param $name
+     * @return mixed|Monolog|LoggerInterface
+     * @throws \Exception
      */
     protected function get($name)
     {
@@ -158,7 +158,8 @@ class LogManager implements LoggerInterface
     /**
      * Create an emergency log handler to avoid white screens of death.
      *
-     * @return \Monolog\Logger
+     * @return Monolog
+     * @throws \Exception
      */
     protected function createEmergencyLogger()
     {
@@ -183,8 +184,8 @@ class LogManager implements LoggerInterface
      * Create an aggregate log driver instance.
      *
      * @param array $config
-     *
-     * @return \Monolog\Logger
+     * @return Monolog
+     * @throws \Exception
      */
     protected function createStackDriver(array $config)
     {
@@ -198,11 +199,9 @@ class LogManager implements LoggerInterface
     }
 
     /**
-     * Create an instance of the single file log driver.
-     *
      * @param array $config
-     *
-     * @return \Psr\Log\LoggerInterface
+     * @return Monolog
+     * @throws \Exception
      */
     protected function createSingleDriver(array $config)
     {
@@ -334,7 +333,7 @@ class LogManager implements LoggerInterface
      */
     protected function parseChannel(array $config)
     {
-        return $config['name'] ?? null;
+        return $config['name'] ?? 'EaseBaidu';
     }
 
     /**
