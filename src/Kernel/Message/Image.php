@@ -11,7 +11,7 @@
 
 namespace EaseBaidu\Kernel\Message;
 
-class Image extends Message
+class Image extends Media
 {
     /**
      * Messages type.

@@ -16,5 +16,5 @@ interface MediaInterface
     /**
      * @return string
      */
-    public function getMediaId(): string ;
+    public function getMediaID(): string ;
 }
