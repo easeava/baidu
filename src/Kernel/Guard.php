@@ -195,6 +195,8 @@ class Guard
             'MsgType' => $message->getType(),
         ];
 
+        $this->app['logger']->debug('Reply Data:', $prepends);
+
         $response = $message->transformToXml($prepends);
 
         if ($this->isSafeMode()) {

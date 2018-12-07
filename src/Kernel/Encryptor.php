@@ -23,7 +23,7 @@ class Encryptor
     const ERROR_PARSE_XML = -40002; // Parse XML failed
     const ERROR_CALC_SIGNATURE = -40003; // Calculating the signature failed
     const ERROR_INVALID_AES_KEY = -40004; // Invalid AESKey
-    const ERROR_INVALID_APP_ID = -40005; // Check AppID failed
+    const ERROR_INVALID_CLIENT_ID = -40005; // Check AppID failed
     const ERROR_ENCRYPT_AES = -40006; // AES EncryptionInterface failed
     const ERROR_DECRYPT_AES = -40007; // AES decryption failed
     const ERROR_INVALID_XML = -40008; // Invalid XML
@@ -102,8 +102,8 @@ class Encryptor
         }
         // @codeCoverageIgnoreEnd
 
-        !is_null($nonce) || $nonce = substr($this->clientID, 0, 10);
-        !is_null($timestamp) || $timestamp = time();
+        ! is_null($nonce) || $nonce = substr($this->clientID, 0, 10);
+        ! is_null($timestamp) || $timestamp = time();
 
         $response = [
             'Encrypt' => $encrypted,
@@ -140,12 +140,13 @@ class Encryptor
             substr($this->aesKey, 0, 16),
             OPENSSL_NO_PADDING
         );
+
         $result = $this->decode($decrypted);
         $content = substr($result, 16, strlen($result));
         $contentLen = unpack('N', substr($content, 0, 4))[1];
 
         if (trim(substr($content, $contentLen + 4)) !== $this->clientID) {
-            throw new RuntimeException('Invalid appId.', self::ERROR_INVALID_APP_ID);
+            throw new RuntimeException('Invalid clientId.', self::ERROR_INVALID_CLIENT_ID);
         }
 
         return substr($content, 4, $contentLen);
