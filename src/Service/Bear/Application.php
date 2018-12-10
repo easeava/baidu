@@ -18,5 +18,6 @@ class Application extends Container
         OAuth\ServiceProvider::class,
         Server\ServiceProvider::class,
         Menu\ServiceProvider::class,
+        User\ServiceProvider::class,
     ];
 }
