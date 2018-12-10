@@ -20,6 +20,7 @@ class Application extends Container
         Server\ServiceProvider::class,
         Menu\ServiceProvider::class,
         User\ServiceProvider::class,
+        DataCube\ServiceProvider::class,
         Base\Media\ServiceProvider::class,
     ];
 }
