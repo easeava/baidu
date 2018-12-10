@@ -9,6 +9,7 @@
 
 namespace EaseBaidu\Service\Bear;
 
+use EaseBaidu\Service\Base;
 use EaseBaidu\Kernel\Container;
 
 class Application extends Container
@@ -19,5 +20,6 @@ class Application extends Container
         Server\ServiceProvider::class,
         Menu\ServiceProvider::class,
         User\ServiceProvider::class,
+        Base\Media\ServiceProvider::class,
     ];
 }
