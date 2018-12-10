@@ -35,7 +35,7 @@ class UserClient extends BaseClient
                 ];
             }, $openID) ,
         ];
-        var_dump($params);
+
         return $this->httpPostJson('/rest/2.0/cambrian/user/info', $params);
     }
 
@@ -50,5 +50,24 @@ class UserClient extends BaseClient
     public function list(string $start_index = null)
     {
         return $this->httpGet('/rest/2.0/cambrian/user/get', ['start_index' => $start_index]);
+    }
+
+    public function blacklist(string $begin_openid)
+    {
+        return $this->httpGet('/rest/2.0/cambrian/tags/getblacklist', compact('begin_openid'));
+    }
+
+    public function block($opendList)
+    {
+        return $this->httpPostJson('/rest/2.0/cambrian/tags/batchblacklist', [
+            'openid_list' => (array) $opendList,
+        ]);
+    }
+
+    public function unblock($opendList)
+    {
+        return $this->httpPostJson('/rest/2.0/cambrian/tags/batchunblacklist', [
+            'openid_list' => (array) $opendList,
+        ]);
     }
 }
