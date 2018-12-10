@@ -51,7 +51,7 @@ class BaseClient
     public function __construct(Container $app, AccessTokenInterface $accessToken = null)
     {
         $this->app = $app;
-        $this->accessToken = $accessToken;
+        $this->accessToken = $accessToken ?? $this->app['access_token'];
     }
 
     /**
@@ -229,7 +229,7 @@ class BaseClient
         return function (callable $handler) {
             return function (RequestInterface $request, array $options) use ($handler) {
                 if ($this->accessToken) {
-                    $request = $this->accessToken->appluToRequest($request, $options);
+                    $request = $this->accessToken->applyToRequest($request, $options);
                 }
 
                 return $handler($request, $options);

@@ -101,7 +101,7 @@ abstract class AccessToken implements AccessTokenInterface
     public function setToken(string $token, int $lifetime = 7200)
     {
         $this->getCache()->set($this->getCacheKey(), [
-            $this->tokenKey = $token,
+            $this->tokenKey => $token,
             'expires_in' => $lifetime,
         ], $lifetime - $this->safeSeconds);
 
@@ -148,6 +148,10 @@ abstract class AccessToken implements AccessTokenInterface
      * @param RequestInterface $request
      * @param array $requestOptions
      * @return RequestInterface
+     * @throws HttpException
+     * @throws InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function applyToRequest(RequestInterface $request, array $requestOptions = []): RequestInterface
     {
@@ -198,6 +202,10 @@ abstract class AccessToken implements AccessTokenInterface
 
     /**
      * @return array
+     * @throws HttpException
+     * @throws InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     protected function getQuery(): array
     {

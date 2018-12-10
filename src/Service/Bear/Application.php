@@ -14,7 +14,9 @@ use EaseBaidu\Kernel\Container;
 class Application extends Container
 {
     protected $providers = [
+        Auth\ServiceProvider::class,
         OAuth\ServiceProvider::class,
         Server\ServiceProvider::class,
+        Menu\ServiceProvider::class,
     ];
 }
