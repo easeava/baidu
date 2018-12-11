@@ -18,6 +18,9 @@ use EaseBaidu\Kernel\Message\Article;
 
 class Client extends BaseClient
 {
+    /**
+     * @var array
+     */
     protected $allowTypes = ['image', 'voice', 'news_image'];
 
     /**
