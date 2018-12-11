@@ -156,9 +156,7 @@ class Client extends BaseClient
     public function get(string $mediaID)
     {
         $response = $this->requestRaw('/rest/2.0/cambrian/material/get_material', 'GET', [
-            'query' => [
-                'media_id' => $mediaID,
-            ],
+            'media_id' => $mediaID,
         ]);
 
         if (false !== stripos($response->getHeaderLine('Content-disposition'), 'attachment')) {
@@ -179,9 +177,7 @@ class Client extends BaseClient
     public function delete(string $mediaID)
     {
         return $this->httpGet('/rest/2.0/cambrian/material/del_material', [
-            'query' => [
-                'media_id' => $mediaID,
-            ],
+            'media_id' => $mediaID,
         ]);
     }
 

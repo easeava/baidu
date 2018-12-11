@@ -55,9 +55,7 @@ class Client extends BaseClient
      */
     public function get(string $mediaid)
     {
-        $response = $this->requestRaw('/media/get', 'GET', [
-            'query' => compact('mediaid'),
-        ]);
+        $response = $this->requestRaw('/media/get', 'GET', compact('mediaid'));
 
         if (false !== stripos($response->getHeaderLine('Content-disposition'), 'attachment')) {
             return StreameResponse::buildFromPsrResponse($response);
