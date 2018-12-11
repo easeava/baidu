@@ -17,7 +17,6 @@ use EaseBaidu\Kernel\Exceptions\RuntimeException;
 use EaseBaidu\Kernel\Message\Image;
 use EaseBaidu\Kernel\Message\Media;
 use EaseBaidu\Kernel\Message\Text;
-use EaseBaidu\Kernel\Support\Arr;
 
 class Client extends BaseClient
 {
@@ -33,7 +32,7 @@ class Client extends BaseClient
     public function send(array $message)
     {
         if (empty($message['filter']) && empty($message['touser'])) {
-            throw new RuntimeException('The message reception object is not specified'));
+            throw new RuntimeException('The message reception object is not specified');
         }
 
         return $this->httpPostJson('/rest/2.0/cambrian/message/sendall', $message);

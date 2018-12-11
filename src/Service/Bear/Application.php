@@ -21,6 +21,7 @@ class Application extends Container
         Menu\ServiceProvider::class,
         User\ServiceProvider::class,
         DataCube\ServiceProvider::class,
+        Material\ServiceProvider::class,
         Base\Media\ServiceProvider::class,
         Base\Jssdk\ServiceProvider::class,
     ];
