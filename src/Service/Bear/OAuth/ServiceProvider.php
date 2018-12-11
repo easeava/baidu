@@ -31,7 +31,7 @@ class ServiceProvider implements ServiceProviderInterface
         $app['oauth'] = function ($app) {
             $socialite = (new SocialiteManager([
                 'baidu' => [
-                    'client_id' => $app['config']['app_id'],
+                    'client_id' => $app['config']['client_id'],
                     'client_secret' => $app['config']['secret'],
                     'redirect' => $this->prepareCallbackUrl($app),
                 ],

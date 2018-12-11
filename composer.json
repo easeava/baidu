@@ -31,6 +31,8 @@
     "psr-4": {
       "EaseBaidu\\": "src/"
     },
-    "files": []
+    "files": [
+      "src/helpers.php"
+    ]
   }
 }
