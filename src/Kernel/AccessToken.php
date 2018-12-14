@@ -133,6 +133,7 @@ abstract class AccessToken implements AccessTokenInterface
     public function requestToken(array $credentials, $toArray = false)
     {
         $response = $this->sendRequest($credentials);
+
         $result = json_decode($response->getBody()->getContents(), true);
 
         $formatted = $this->castResponseToType($response, $this->app['config']->get('response_type'));

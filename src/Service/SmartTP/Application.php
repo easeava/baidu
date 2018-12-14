@@ -9,11 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace EaseAva\Service\TP;
+namespace EaseBaidu\Service\SmartTP;
 
 use EaseBaidu\Kernel\Container;
 
 class Application extends Container
 {
+    protected $providers = [
+        Auth\ServiceProvider::class,
+        Server\ServiceProvider::class,
+    ];
 
+    public function smart(string $client_id, string $refresh_token)
+    {
+
+    }
 }
