@@ -16,8 +16,19 @@ use EaseBaidu\Kernel\Exceptions\HttpException;
 
 class AccessToken extends BaseAccessToken
 {
+    /**
+     * @var string
+     */
     protected $endpointToGetToken = '/public/2.0/smartapp/auth/tp/token';
 
+    /**
+     * @param array $credentials
+     * @param bool $toArray
+     * @return array|\EaseBaidu\Kernel\Http\Response|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
+     * @throws HttpException
+     * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function requestToken(array $credentials, $toArray = false)
     {
         $response = $this->sendRequest($credentials);
