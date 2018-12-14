@@ -17,5 +17,7 @@ class Application extends Container
 {
     protected $providers = [
         TemplateMessage\ServiceProvider::class,
+        Auth\ServiceProvider::class,
+        Server\ServiceProvider::class,
     ];
 }

@@ -26,7 +26,7 @@ class Client extends BaseClient
     public function session(string $code)
     {
         /**
-         * 参见 https://smartprogram.baidu.com/docs/develop/api/open_log/#login/
+         * 参见 https://smartprogram.baidu.com/docs/develop/api/open_log/#Session-Key/
          * Session Key
          */
         $params = [
