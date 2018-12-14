@@ -9,13 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace EaseBaidu\Service\SmartProgram;
+namespace EaseBaidu\Service\Bear\TemplateMessage;
 
-use EaseBaidu\Kernel\Container;
+use EaseBaidu\Kernel\BaseClient;
 
-class Application extends Container
+class Client extends BaseClient
 {
-    protected $providers = [
-        TemplateMessage\ServiceProvider::class,
-    ];
+
 }
