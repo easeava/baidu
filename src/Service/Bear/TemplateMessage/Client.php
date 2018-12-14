@@ -16,6 +16,16 @@ use EaseBaidu\Kernel\Exceptions\InvalidArgumentException;
 
 class Client extends BaseClient
 {
+    /**
+     * Define send url.
+     *
+     * @var string
+     */
+    const API_SEND = '/rest/2.0/cambrian/template/send';
+
+    /**
+     * @var array
+     */
     protected $message = [
         'touser' => '',
         'template_id' => '',
@@ -23,6 +33,9 @@ class Client extends BaseClient
         'data' => [],
     ];
 
+    /**
+     * @var array
+     */
     protected $required = [
         'touser',
         'template_id',
@@ -101,7 +114,7 @@ class Client extends BaseClient
 
         $this->restoreMessage();
 
-        return $this->httpPostJson('/rest/2.0/cambrian/template/send', $params);
+        return $this->httpPostJson(static::API_SEND, $params);
     }
 
     /**

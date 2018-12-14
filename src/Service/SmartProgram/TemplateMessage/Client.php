@@ -11,10 +11,17 @@
 
 namespace EaseBaidu\Service\SmartProgram\TemplateMessage;
 
-use EaseBaidu\Kernel\BaseClient;
+use EaseBaidu\Service\Bear\TemplateMessage\Client as BaseClient;
 
 class Client extends BaseClient
 {
+    /**
+     * Define send api url.
+     *
+     * @var string
+     */
+    const API_SEND = '/rest/2.0/smartapp/template/send';
+
     /**
      * Get template library list.
      *
