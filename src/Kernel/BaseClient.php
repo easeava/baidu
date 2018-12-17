@@ -43,11 +43,6 @@ class BaseClient
     protected $baseUri;
 
     /**
-     * @var bool
-     */
-    protected $accessMiddleware = true;
-
-    /**
      * BaseClient constructor.
      *
      * @param Container $app
@@ -157,13 +152,6 @@ class BaseClient
         return $this;
     }
 
-    public function setAccessMiddleware(bool $access = true)
-    {
-        $this->accessMiddleware = $access;
-
-        return $this;
-    }
-
     /**
      * @param string $url
      * @param string $method
@@ -217,9 +205,7 @@ class BaseClient
         // retry
         $this->pushMiddleware($this->retryMiddleware(), 'retry');
         // access token
-        if ($this->accessToken) {
-            $this->pushMiddleware($this->accessTokenMiddleware(), 'access_token');
-        }
+        $this->pushMiddleware($this->accessTokenMiddleware(), 'access_token');
         // log
         $this->pushMiddleware($this->logMiddleware(), 'log');
     }

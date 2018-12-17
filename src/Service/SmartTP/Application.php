@@ -12,6 +12,10 @@
 namespace EaseBaidu\Service\SmartTP;
 
 use EaseBaidu\Kernel\Container;
+use EaseBaidu\Service\SmartProgram\Encryptor;
+use EaseBaidu\Service\SmartTP\Authorizer\Auth\AccessToken;
+use EaseBaidu\Service\SmartTP\Authorizer\SmartProgram\Auth\Client;
+use EaseBaidu\Service\SmartTP\Server\Guard;
 
 class Application extends Container
 {
@@ -21,9 +25,29 @@ class Application extends Container
         Server\ServiceProvider::class,
     ];
 
-    public function smart(string $client_id, string $refresh_token)
+    /**
+     * Create smart program application.
+     *
+     * @param string $client_id
+     * @param string|null $refresh_token
+     * @param AccessToken|null $accessToken
+     * @return Authorizer\SmartProgram\Application
+     */
+    public function smart(string $client_id, string $refresh_token = null, AccessToken $accessToken = null)
     {
+        return new Authorizer\SmartProgram\Application($this->getAuthorizerConfig($client_id, $refresh_token), $this->getReplaceServices($accessToken) + [
+            'encryptor' => function () {
+                return new Encryptor(
+                    $this['config']['app_id'],
+                    $this['config']['token'],
+                    $this['config']['aes_key']
+                );
+            },
 
+            'auth' => function ($app) {
+                return new Client($app);
+            },
+        ]);
     }
 
     /**
@@ -39,6 +63,36 @@ class Application extends Container
         ];
 
         return 'https://smartprogram.baidu.com/mappconsole/tp/authorization?' . http_build_query($params);
+    }
+
+    protected function getAuthorizerConfig(string $client_id, string $refesh_token = null)
+    {
+        return $this['config']->merge(compact('client_id', 'refesh_token'))->toArray();
+    }
+
+    /**
+     * @param AccessToken|null $accessToken
+     * @return array
+     */
+    protected function getReplaceServices(AccessToken $accessToken = null)
+    {
+        $services = [
+            'access_token' => $accessToken ?: function ($app) {
+                return new AccessToken($app, $this);
+            },
+
+            'server' => function ($app) {
+                return new Guard($app);
+            },
+        ];
+
+        foreach (['cache', 'http_client', 'log', 'logger', 'request'] as $reuse) {
+            if (isset($this[$reuse])) {
+                $services[$reuse] = $this[$reuse];
+            }
+        }
+
+        return $services;
     }
 
     /**

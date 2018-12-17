@@ -43,7 +43,7 @@ class Client extends BaseClient
      */
     public function getAuthorizer(string $access_token)
     {
-        return $this->setAccessMiddleware(false)->httpGet('/rest/2.0/smartapp/app/info', compact('access_token'));
+        return $this->httpGet('/rest/2.0/smartapp/app/info', compact('access_token'));
     }
 
     /**
