@@ -175,6 +175,7 @@ trait HasHttpRequests
 
         /** @var \GuzzleHttp\Psr7\MessageTrait $response */
         $response = $this->getHttpClient()->request($method, $url, $options);
+
         $response->getBody()->rewind();
 
         return $response;

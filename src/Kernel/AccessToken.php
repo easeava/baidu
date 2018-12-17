@@ -82,10 +82,13 @@ abstract class AccessToken implements AccessTokenInterface
         $cache = $this->getCache();
 
         if (! $refresh && $cache->has($cacheKey)) {
+            $this->app['logger']->info('Get token from cache key:', [$cacheKey]);
             return $cache->get($cacheKey);
         }
 
         $token = $this->requestToken($this->getCredentials(), true);
+
+        $this->app['logger']->info('Request get token:', $token);
 
         $this->setToken($token[$this->tokenKey], $token['expires_in'] ?? 7200);
 

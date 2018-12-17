@@ -43,6 +43,11 @@ class BaseClient
     protected $baseUri;
 
     /**
+     * @var bool
+     */
+    protected $accessMiddleware = true;
+
+    /**
      * BaseClient constructor.
      *
      * @param Container $app
@@ -63,10 +68,26 @@ class BaseClient
      */
     public function httpGet(string $url, array $query = [])
     {
-        return $this->request($url, 'GET', $query);
+        return $this->request($url, 'GET', ['query' => $query]);
     }
 
     /**
+     * POST request.
+     *
+     * @param string $url
+     * @param array $data
+     * @return array|Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|ResponseInterface
+     * @throws Exceptions\InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function httpPost(string $url, array $data = [])
+    {
+        return $this->request($url, 'POST', ['form_params' => $data]);
+    }
+
+    /**
+     * JSON request.
+     *
      * @param string $url
      * @param array $data
      * @param array $query
@@ -83,6 +104,8 @@ class BaseClient
     }
 
     /**
+     * Upload file.
+     *
      * @param string $url
      * @param array $files
      * @param array $form
@@ -134,6 +157,13 @@ class BaseClient
         return $this;
     }
 
+    public function setAccessMiddleware(bool $access = true)
+    {
+        $this->accessMiddleware = $access;
+
+        return $this;
+    }
+
     /**
      * @param string $url
      * @param string $method
@@ -180,14 +210,16 @@ class BaseClient
     }
 
     /**
-     *
+     * Register Guzzle middlewares.
      */
     public function registerHttpMiddlewares()
     {
         // retry
         $this->pushMiddleware($this->retryMiddleware(), 'retry');
         // access token
-        $this->pushMiddleware($this->accessTokenMiddleware(), 'access_token');
+        if ($this->accessToken) {
+            $this->pushMiddleware($this->accessTokenMiddleware(), 'access_token');
+        }
         // log
         $this->pushMiddleware($this->logMiddleware(), 'log');
     }
