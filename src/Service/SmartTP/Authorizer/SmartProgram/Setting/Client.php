@@ -28,9 +28,9 @@ class Client extends BaseClient
      * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getAllCategories()
+    public function getAllCategories(int $category_type = 2)
     {
-        return $this->httpGet('/rest/2.0/smartapp/app/category/list');
+        return $this->httpGet('/rest/2.0/smartapp/app/category/list', compact('category_type'));
     }
 
     /**

@@ -65,9 +65,9 @@ class Application extends Container
         return 'https://smartprogram.baidu.com/mappconsole/tp/authorization?' . http_build_query($params);
     }
 
-    protected function getAuthorizerConfig(string $client_id, string $refesh_token = null)
+    protected function getAuthorizerConfig(string $client_id, string $refresh_token = null)
     {
-        return $this['config']->merge(compact('client_id', 'refesh_token'))->toArray();
+        return $this['config']->merge(compact('client_id', 'refresh_token'))->toArray();
     }
 
     /**

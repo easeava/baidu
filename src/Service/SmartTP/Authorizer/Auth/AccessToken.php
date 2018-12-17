@@ -17,14 +17,22 @@ use Pimple\Container;
 
 class AccessToken extends BaseAccessToken
 {
+    /**
+     * @var string
+     */
+    protected $queryName = 'access_token';
 
-    protected $componet;
+    protected $endpointToGetToken = '/rest/2.0/oauth/token';
 
-    public function __construct(Container $app, Application $compoent)
+    /**
+     * @var Application
+     */
+    protected $component;
+
+    public function __construct(Container $app, Application $component)
     {
         parent::__construct($app);
-
-        $this->componet = $compoent;
+        $this->component = $component;
     }
 
     /**
@@ -36,20 +44,8 @@ class AccessToken extends BaseAccessToken
     {
         return [
             'refresh_token' => $this->app['config']['refresh_token'],
-            'grant_type' => 'app_to_tp_authorization_code',
-        ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getEndpoint(): string
-    {
-        $params = [
-            'refresh_token' => $this->app['config']['refresh_token'],
             'grant_type' => 'app_to_tp_refresh_token',
+            'access_token' => $this->component['access_token']->getToken()[$this->tokenKey],
         ];
-
-        return '/rest/2.0/oauth/token?' . http_build_query($params);
     }
 }

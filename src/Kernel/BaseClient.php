@@ -163,6 +163,7 @@ class BaseClient
      */
     public function request(string $url, string $method = 'GET', array $options = [], $returnRaw = false)
     {
+
         if (empty($this->middlewares)) {
             $this->registerHttpMiddlewares();
         }
