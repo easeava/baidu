@@ -105,10 +105,7 @@ abstract class AccessToken implements AccessTokenInterface
      */
     public function setToken(array $token, int $lifetime = 7200)
     {
-        $this->getCache()->set($this->getCacheKey(), [
-            $this->tokenKey => $token[$this->tokenKey],
-            'expires_in' => $lifetime,
-        ], $lifetime - $this->safeSeconds);
+        $this->getCache()->set($this->getCacheKey(), $token, $lifetime - $this->safeSeconds);
 
         return $this;
     }

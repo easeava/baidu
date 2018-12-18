@@ -12,12 +12,12 @@
 namespace EaseBaidu\Service\SmartTP\Base;
 
 use EaseBaidu\Kernel\BaseClient;
-use GuzzleHttp\Exception\BadResponseException;
 
 class Client extends BaseClient
 {
     /**
      * Get authorization info.
+     * @see https://smartprogram.baidu.com/docs/develop/third/pro/ 使用授权码换小程序的接口调用凭据和授权信息
      *
      * @param string|null $code
      * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
@@ -36,6 +36,7 @@ class Client extends BaseClient
 
     /**
      * Get smart program base info.
+     * @see https://smartprogram.baidu.com/docs/develop/third/pro/ 获取小程序基础信息
      *
      * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
      * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
@@ -48,6 +49,7 @@ class Client extends BaseClient
 
     /**
      * Get pre auth code.
+     * @see https://smartprogram.baidu.com/docs/develop/third/pro/ 获取预授权码pre_auth_code
      *
      * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
      * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException

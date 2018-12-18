@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace EaseBaidu\Service\SmartTP\Auth;
+namespace EaseBaidu\Service\BearTP\Auth;
 
-use EaseBaidu\Kernel\Exceptions\RuntimeException;
 use EaseBaidu\Kernel\Ticket;
 
 class VerifyTicket extends Ticket
 {
+
     /**
      * @return string
      */
     protected function getCacheKey(): string
     {
-        return 'easebaidu.smart_tp.ticket.'.$this->app['config']['client_id'];
+        return 'easebaidu.bear.tp_verify_ticket.'.$this->app['config']['client_id'];
     }
 }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace EaseBaidu\Service\Bear\User;
+namespace EaseBaidu\Service\BearTP\Authorizer\Bear\Base;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -23,16 +23,12 @@ class ServiceProvider implements ServiceProviderInterface
      * This method should only be used to configure services and parameters.
      * It should not get services.
      *
-     * @param Container $pimple A container instance
+     * @param Container $app A container instance
      */
     public function register(Container $app)
     {
-        $app['user'] = function ($app) {
-            return new UserClient($app);
-        };
-
-        $app['user_tag'] = function ($app) {
-            return new TagClient($app);
+        $app['base'] = function ($app) {
+            return new Client($app);
         };
     }
 }

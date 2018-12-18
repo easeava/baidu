@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Guard extends \EaseBaidu\Kernel\Guard
 {
-    const EVENT_TP_VERIFY_TICKET = 'ticket';
+    const EVENT_SMARTTP_VERIFY_TICKET = 'ticket';
 
     /**
      * @return Response
@@ -77,7 +77,7 @@ class Guard extends \EaseBaidu\Kernel\Guard
      */
     protected function registerHandlers()
     {
-        $this->on(self::EVENT_TP_VERIFY_TICKET, VerifyTicket::class);
+        $this->on(self::EVENT_SMARTTP_VERIFY_TICKET, VerifyTicket::class);
     }
 
     protected function decryptMessage(array $message)

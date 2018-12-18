@@ -30,7 +30,7 @@ class TagClient extends BaseClient
                 'name' => $name,
             ],
         ];
-        return $this->httpPostJson('/rest/2.0/cambrian/tags/create', []);
+        return $this->httpPostJson('/rest/2.0/cambrian/tags/create', $params);
     }
 
     /**

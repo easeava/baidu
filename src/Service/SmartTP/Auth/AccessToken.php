@@ -14,6 +14,12 @@ namespace EaseBaidu\Service\SmartTP\Auth;
 use EaseBaidu\Kernel\AccessToken as BaseAccessToken;
 use EaseBaidu\Kernel\Exceptions\HttpException;
 
+/**
+ * Class AccessToken
+ * SmartTP AccessToken
+ *
+ * @package EaseBaidu\Service\SmartTP\Auth
+ */
 class AccessToken extends BaseAccessToken
 {
     /**

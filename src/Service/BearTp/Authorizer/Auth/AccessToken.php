@@ -9,20 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace EaseBaidu\Service\SmartTP\Authorizer\Auth;
+namespace EaseBaidu\Service\BearTP\Authorizer\Auth;
 
-use EaseBaidu\Kernel\AccessToken as BaseAccessToken;
-use EaseBaidu\Service\SmartTP\Application;
-use Pimple\Container;
 use Closure;
+use EaseBaidu\Service\BearTP\Application;
+use Pimple\Container;
 
-/**
- * Class AccessToken
- * 授权APP AccessToken
- *
- * @package EaseBaidu\Service\SmartTP\Authorizer\Auth
- */
-class AccessToken extends BaseAccessToken
+class AccessToken extends \EaseBaidu\Kernel\AccessToken
 {
     /**
      * @var string
@@ -32,12 +25,12 @@ class AccessToken extends BaseAccessToken
     /**
      * @var string
      */
-    protected $endpointToGetToken = '/rest/2.0/oauth/token';
+    protected $endpointToGetToken = '/rest/2.0/cambrian/tp/api_authorizer_token';
 
     /**
      * @var string
      */
-    protected $cachePrefix = 'easebaidu.smart_tp.app.access_token.';
+    protected $cachePrefix = 'easebaidu.bear_tp.app.access_token.';
 
     /**
      * @var
@@ -52,6 +45,7 @@ class AccessToken extends BaseAccessToken
     public function __construct(Container $app, Application $component)
     {
         parent::__construct($app);
+
         $this->component = $component;
     }
 
@@ -70,16 +64,15 @@ class AccessToken extends BaseAccessToken
     protected function getCredentials(): array
     {
         return [
-            'access_token' => $this->component['access_token']->getToken()['access_token'],
+            'tp_access_token' => $this->component['access_token']->getToken()['tp_access_token'],
             'refresh_token' => $this->app['config']['refresh_token'],
-            'grant_type' => 'app_to_tp_refresh_token',
         ];
     }
 
     /**
      * @param array $token
      * @param int $lifetime
-     * @return $this|BaseAccessToken
+     * @return $this|\EaseBaidu\Kernel\AccessToken
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function setToken(array $token, int $lifetime = 7200)
