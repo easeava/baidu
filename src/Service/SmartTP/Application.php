@@ -11,6 +11,7 @@
 
 namespace EaseBaidu\Service\SmartTP;
 
+use Closure;
 use EaseBaidu\Kernel\Container;
 use EaseBaidu\Service\SmartProgram\Encryptor;
 use EaseBaidu\Service\SmartTP\Authorizer\Auth\AccessToken;
@@ -25,17 +26,26 @@ class Application extends Container
         Server\ServiceProvider::class,
     ];
 
+    protected $refreshTokenCallback;
+
+    public function setRefreshTokenCallback(Closure $closure)
+    {
+        $this->refreshTokenCallback = $closure;
+
+        return $this;
+    }
+
     /**
      * Create smart program application.
      *
-     * @param string $client_id
+     * @param string $app_id
      * @param string|null $refresh_token
      * @param AccessToken|null $accessToken
      * @return Authorizer\SmartProgram\Application
      */
-    public function smart(string $client_id, string $refresh_token = null, AccessToken $accessToken = null)
+    public function smart(string $app_id, string $refresh_token = null, AccessToken $accessToken = null)
     {
-        return new Authorizer\SmartProgram\Application($this->getAuthorizerConfig($client_id, $refresh_token), $this->getReplaceServices($accessToken) + [
+        return new Authorizer\SmartProgram\Application($this->getAuthorizerConfig($app_id, $refresh_token), $this->getReplaceServices($accessToken) + [
             'encryptor' => function () {
                 return new Encryptor(
                     $this['config']['app_id'],
@@ -65,9 +75,14 @@ class Application extends Container
         return 'https://smartprogram.baidu.com/mappconsole/tp/authorization?' . http_build_query($params);
     }
 
-    protected function getAuthorizerConfig(string $client_id, string $refresh_token = null)
+    /**
+     * @param string $app_id
+     * @param string|null $refresh_token
+     * @return mixed
+     */
+    protected function getAuthorizerConfig(string $app_id, string $refresh_token = null)
     {
-        return $this['config']->merge(compact('client_id', 'refresh_token'))->toArray();
+        return $this['config']->merge(compact('app_id', 'refresh_token'))->toArray();
     }
 
     /**
@@ -78,7 +93,13 @@ class Application extends Container
     {
         $services = [
             'access_token' => $accessToken ?: function ($app) {
-                return new AccessToken($app, $this);
+                $access_token = new AccessToken($app, $this);
+
+                if ($this->refreshTokenCallback) {
+                    $access_token->setRefreshTokenCallback($this->refreshTokenCallback);
+                }
+
+                return $access_token;
             },
 
             'server' => function ($app) {

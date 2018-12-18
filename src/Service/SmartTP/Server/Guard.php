@@ -20,9 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Guard extends \EaseBaidu\Kernel\Guard
 {
-    const EVENT_AUTHORIZED = 'authorized';
-    const EVENT_UNAUTHORIZED = 'unauthorized';
-    const EVENT_UPDATE_AUTHORIZED = 'updateauthorized';
     const EVENT_TP_VERIFY_TICKET = 'ticket';
 
     /**
@@ -80,9 +77,6 @@ class Guard extends \EaseBaidu\Kernel\Guard
      */
     protected function registerHandlers()
     {
-        $this->on(self::EVENT_AUTHORIZED, Authorized::class);
-        $this->on(self::EVENT_UNAUTHORIZED, Unauthorized::class);
-        $this->on(self::EVENT_UPDATE_AUTHORIZED, Updateauthorized::class);
         $this->on(self::EVENT_TP_VERIFY_TICKET, VerifyTicket::class);
     }
 

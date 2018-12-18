@@ -63,6 +63,8 @@ abstract class AccessToken implements AccessTokenInterface
      */
     protected $cachePrefix = 'easebaidu.kernel.access_token.';
 
+
+
     public function __construct(Container $app)
     {
         $this->app = $app;
@@ -90,7 +92,7 @@ abstract class AccessToken implements AccessTokenInterface
 
         $this->app['logger']->info('Request get token:', $token);
 
-        $this->setToken($token[$this->tokenKey], $token['expires_in'] ?? 7200);
+        $this->setToken($token, $token['expires_in'] ?? 7200);
 
         return $token;
     }
@@ -101,10 +103,10 @@ abstract class AccessToken implements AccessTokenInterface
      * @return $this
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function setToken(string $token, int $lifetime = 7200)
+    public function setToken(array $token, int $lifetime = 7200)
     {
         $this->getCache()->set($this->getCacheKey(), [
-            $this->tokenKey => $token,
+            $this->tokenKey => $token[$this->tokenKey],
             'expires_in' => $lifetime,
         ], $lifetime - $this->safeSeconds);
 
