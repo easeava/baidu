@@ -79,6 +79,8 @@ class AccessToken extends \EaseBaidu\Kernel\AccessToken
     {
         parent::setToken($token);
 
+        $this->app['logger']->info('setToken cache ket: ', [$this->getCacheKey()]);
+
         if ($this->refreshTokenCallback) {
             call_user_func($this->refreshTokenCallback, $token, $this->app);
         }
@@ -86,5 +88,13 @@ class AccessToken extends \EaseBaidu\Kernel\AccessToken
         $this->app['config']['refresh_token'] = $token['refresh_token'];
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCacheKey(): string
+    {
+        return $this->cachePrefix . md5($this->app['config']['client_id']);
     }
 }
