@@ -11,10 +11,10 @@
 
 namespace EaseBaidu\Service\BearTP\Authorizer\Bear\OAuth;
 
-use EaseAva\Socialite\Contracts\BiaduComponentInterface;
+use EaseAva\Socialite\Contracts\BaiduComponentInterface;
 use EaseBaidu\Service\BearTP\Application;
 
-class ComponentDelegate implements BiaduComponentInterface
+class ComponentDelegate implements BaiduComponentInterface
 {
 
     /**
