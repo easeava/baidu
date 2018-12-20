@@ -1,5 +1,5 @@
 # baidu
-百度SDK
+百度智能小程序、小程序TP、熊掌号、熊掌号TP SDK.
 
 ## 安装
 ```shell
