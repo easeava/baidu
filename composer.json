@@ -1,5 +1,13 @@
 {
   "name": "easeava/baidu",
+  "description": "百度智能小程序、小程序TP、熊掌号、熊掌号TP SDK.",
+  "keywords": [
+	   "百度智能小程序",
+	   "小程序TP",
+	   "熊掌号",
+	   "熊掌号TP",
+	   "SDK"
+  ],
   "require": {
     "php": ">=7.0",
     "ext-fileinfo": "*",
