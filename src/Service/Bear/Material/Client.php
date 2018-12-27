@@ -53,7 +53,7 @@ class Client extends BaseClient
     }
 
     /**
-     * Update article.
+     * Update material.
      *
      * @param string $mediaID
      * @param $article
@@ -62,7 +62,7 @@ class Client extends BaseClient
      * @throws InvalidArgumentException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function updateArticle(string $mediaID, $article, int $index = 0)
+    public function updateMaterial(string $mediaID, $article, int $index = 0)
     {
         if ($article instanceof Article) {
             $article = $article->transformForJsonRequestWithoutType();
