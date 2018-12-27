@@ -30,7 +30,7 @@ class ServiceProvider implements ServiceProviderInterface
     {
         ! isset($app['encryptor']) && $app['encryptor'] = function ($app) {
             return new Encryptor(
-                $app['config']['client_id'],
+                $app['config']['app_id'],
                 $app['config']['token'],
                 $app['config']['aes_key']
             );
