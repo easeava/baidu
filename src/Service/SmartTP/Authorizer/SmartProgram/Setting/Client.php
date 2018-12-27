@@ -123,4 +123,29 @@ class Client extends BaseClient
     {
         return $this->httpPostJson('/rest/2.0/smartapp/app/setnickname', compact('nick_name'));
     }
+
+    /**
+     * Set support version.
+     *
+     * @param string $version
+     * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function setSupportVersion(string $version)
+    {
+        return $this->httpPostJson('/rest/2.0/smartapp/app/setsupportversion', compact('version'));
+    }
+
+    /**
+     * Get support version.
+     *
+     * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function getSupportVersion()
+    {
+        return $this->httpGet('/rest/2.0/smartapp/app/getsupportversion');
+    }
 }
