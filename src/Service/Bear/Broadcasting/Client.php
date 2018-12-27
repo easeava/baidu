@@ -55,7 +55,7 @@ class Client extends BaseClient
             $message->toUsers($reception);
         }
 
-        return $this->send();
+        return $this->send($message);
     }
 
     /**
