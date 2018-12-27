@@ -9,121 +9,118 @@
  * file that was distributed with this source code.
  */
 
-namespace EaseBaidu\Service\SmartTP\Package;
+namespace EaseBaidu\Service\SmartTP\Authorizer\SmartProgram\Setting;
 
 use EaseBaidu\Kernel\BaseClient;
 
 /**
- * Class Client
- * @see https://smartprogram.baidu.com/docs/develop/third/apppage/
+ * Class Client.
+ * @see https://smartprogram.baidu.com/docs/develop/third/info/
  *
- * @package EaseBaidu\Service\SmartTP\Authorizer\SmartProgram\Package
+ * @package EaseBaidu\Service\SmartTP\Authorizer\SmartProgram
  */
 class Client extends BaseClient
 {
     /**
-     * Uplaod package.
-     *
-     * @param int $template_id
-     * @param int $ext_json
-     * @param string $user_version
-     * @param string $user_desc
-     * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
-     * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function upload(int $template_id, int $ext_json, string $user_version, string $user_desc)
-    {
-        return $this->httpPostJson('/rest/2.0/smartapp/package/upload', compact('template_id', 'ext_json', 'user_version', 'user_desc'));
-    }
-
-    /**
-     * Submit package audit.
-     *
-     * @param string $content
-     * @param string $package_id
-     * @param string $remark
-     * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
-     * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function submitAudit(string $content, string $package_id, string $remark)
-    {
-        return $this->httpPostJson('/rest/2.0/smartapp/package/submitaudit', compact('content', 'package_id', 'remark'));
-    }
-
-    /**
-     * Release package.
-     *
-     * @param string $package_id
-     * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
-     * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function release(string $package_id)
-    {
-        return $this->httpPostJson('/rest/2.0/smartapp/package/release', compact('package_id'));
-    }
-
-    /**
-     * @param string $package_id
-     * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
-     * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function rollback(string $package_id)
-    {
-        return $this->httpPostJson('/rest/2.0/smartapp/package/rollback', compact('package_id'));
-    }
-
-    /**
-     * With draw.
-     *
-     * @param string $package_id
-     * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
-     * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
-     * @throws \GuzzleHttp\Exception\GuzzleException
-     */
-    public function withdraw(string $package_id)
-    {
-        return $this->httpPostJson('/rest/2.0/smartapp/package/withdraw', compact('package_id'));
-    }
-
-    /**
-     * Get trial details.
+     * Get all category.
      *
      * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
      * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getTrial()
+    public function getAllCategories(int $category_type = 2)
     {
-        return $this->httpGet('/rest/2.0/smartapp/package/gettrial');
+        return $this->httpGet('/rest/2.0/smartapp/app/category/list', compact('category_type'));
     }
 
     /**
-     * Get package list.
+     * Update category.
+     *
+     * @param array $category
+     * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function updateCategory(array $category)
+    {
+        return $this->httpPostJson('/rest/2.0/smartapp/app/category/update', $category);
+    }
+
+    /**
+     * Update icon.
+     *
+     * @param string $image_url
+     * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function updateIcon(string $image_url)
+    {
+        return $this->httpPostJson('/rest/2.0/smartapp/app/modifyheadimage', compact('image_url'));
+    }
+
+    /**
+     * Update signature.
+     *
+     * @param string $signature
+     * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function updateSignature(string $signature)
+    {
+        return $this->httpPostJson('/rest/2.0/smartapp/app/modifysignature', compact('signature'));
+    }
+
+    /**
+     * Pause.
      *
      * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
      * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function list()
+    public function pause()
     {
-        return $this->httpGet('/rest/2.0/smartapp/package/get');
+        return $this->httpPostJson('/rest/2.0/smartapp/app/pause');
     }
 
     /**
-     * Get package detail.
+     * Resume.
      *
-     * @param int|null $type
-     * @param int|null $package_id
      * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
      * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function getDetail(int $type = null, int $package_id = null)
+    public function resume()
     {
-        return $this->httpGet('/rest/2.0/smartapp/package/getdetail', compact('type', 'package_id'));
+        return $this->httpPostJson('/rest/2.0/smartapp/app/resume');
+    }
+
+    /**
+     * Get qrcode.
+     *
+     * @param string|null $path
+     * @param string|null $package_id
+     * @param int $width
+     * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function qrcode(string $path = null, string $package_id = null, int $width = 200)
+    {
+        return $this->httpGet('/rest/2.0/smartapp/app/qrcode', compact('path', 'package_id', 'width'));
+    }
+
+    /**
+     * Set or Update nickname.
+     *
+     * @param string $nick_name
+     * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
+     * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function setNickname(string $nick_name)
+    {
+        return $this->httpPostJson('/rest/2.0/smartapp/app/setnickname', compact('nick_name'));
     }
 }
