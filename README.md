@@ -5,3 +5,6 @@
 ```shell
 composer require easeava/baidu v1.0-beta.2
 ```
+
+## Documentation
+[简易文档](https://easeava.gitbook.io/easebaidu)
