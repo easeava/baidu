@@ -36,7 +36,7 @@ class Client extends BaseClient
      * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function list()
+    public function get()
     {
         return $this->httpGet('/rest/2.0/cambrian/menu/get');
     }
