@@ -3,7 +3,7 @@
 
 ## 安装
 ```shell
-composer require easeava/baidu v1.0-beta.2
+composer require easeava/baidu v1.0-beta.1
 ```
 
 ## Documentation
