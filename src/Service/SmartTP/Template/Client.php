@@ -28,6 +28,7 @@ class Client extends BaseClient
      * @param int $page_size
      * @return array|\EaseBaidu\Kernel\Http\Response|\GuzzleHttp\Psr7\MessageTrait|\Illuminate\Support\Collection|mixed|\Psr\Http\Message\ResponseInterface
      * @throws \EaseBaidu\Kernel\Exceptions\InvalidArgumentException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function list(int $page = 1, int $page_size = 10)
     {
