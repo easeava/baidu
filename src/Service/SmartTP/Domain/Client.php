@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace EaseBaidu\Service\SmartTP\Authorizer\SmartProgram\Domain;
+namespace EaseBaidu\Service\SmartTP\Domain;
 
 use EaseBaidu\Kernel\BaseClient;
 

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace EaseBaidu\Service\SmartTP\Authorizer\SmartProgram\Media;
+namespace EaseBaidu\Service\SmartTP\Media;
 
 use EaseBaidu\Kernel\BaseClient;
 

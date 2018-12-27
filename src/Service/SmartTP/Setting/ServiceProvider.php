@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace EaseBaidu\Service\SmartTP\Authorizer\SmartProgram\Setting;
+namespace EaseBaidu\Service\SmartTP\Setting;
 
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
