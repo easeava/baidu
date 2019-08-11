@@ -36,21 +36,21 @@ class Client extends BaseClient
       *
       * @param integer $totalAmount
       * @param string $tpOrderId
-      * @param string $deadTitle
+      * @param string $dealTitle
       * @param array $bizInfo
       * @return array
       */
-    public function sdkConfig(int $totalAmount, string $tpOrderId, string $deadTitle, array $bizInfo= null): array
+    public function sdkConfig(int $totalAmount, string $tpOrderId, string $dealTitle, array $bizInfo= null): array
     {
         $params = [
             'appKey' => $this->app['config']['appKey'],
-            'deadId' => $this->app['config']['deadId'],
+            'dealId' => $this->app['config']['dealId'],
             'tpOrderId' => $tpOrderId,
             'totalAmount' => $totalAmount
         ];
         $sign = generate_sign_with_rsa($params,$this->app['config']['privateKey']);
         return array_merge($params, [
-            'dealTitle'       => $deadTitle,
+            'dealTitle'       => $dealTitle,
             'signFieldsRange' => 1,
             'rsaSign'         => $sign,
             'bizInfo'         => $bizInfo == null ? '' :json_encode($bizInfo),

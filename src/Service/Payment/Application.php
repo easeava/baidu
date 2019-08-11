@@ -8,6 +8,7 @@
 
 namespace EaseBaidu\Service\Payment;
 
+use Closure;
 use EaseBaidu\Kernel\Container;
 
 /**
@@ -20,4 +21,18 @@ class Application extends Container
     protected $providers = [
         Jssdk\ServiceProvider::class,
     ];
+
+    /**
+     * @param \Closure $closure
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @codeCoverageIgnore
+     *
+     * @throws \EasyWeChat\Kernel\Exceptions\Exception
+     */
+    public function handlePaidNotify(Closure $closure)
+    {
+        return (new Notify\Paid($this))->handle($closure);
+    }
 }

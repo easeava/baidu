@@ -38,12 +38,41 @@ if (! function_exists('generate_sign_with_rsa'))
      */
     function generate_sign_with_rsa(array $attributes, $rsaPriKeyStr)
     {
+        $rsaPriKeyStr = "-----BEGIN RSA PRIVATE KEY-----\n".chunk_split($rsaPriKeyStr, 64, "\n").'-----END RSA PRIVATE KEY-----';
         $priKey = openssl_pkey_get_private($rsaPriKeyStr);
         ksort($attributes);
         openssl_sign(urldecode(http_build_query($attributes)), $sign, $priKey);
         openssl_free_key($priKey);
 
         return base64_encode($sign);
+    }
+}
+if (! function_exists('validate_sign_with_rsa'))
+{
+    /**
+     * Generate a signature.
+     *
+     * @param array  $attributes
+     * @param string $rsaPubKeyStr
+     *
+     * @return bool
+     */
+    function validate_sign_with_rsa(array $attributes, $rsaPubKeyStr)
+    {
+        if (!isset($attributes['rsaSign']) || empty($rsaPubKeyStr)) {
+            return false;
+        }
+        $sign = base64_decode($attributes['rsaSign']);
+        unset($attributes['rsaSign']);
+        if (empty($attributes)) {
+            return false;
+        }
+        $rsaPubKeyStr = "-----BEGIN PUBLIC KEY-----\n".chunk_split($rsaPubKeyStr, 64, "\n").'-----END PUBLIC KEY-----';
+        $pubKey = openssl_pkey_get_public($rsaPubKeyStr);
+        ksort($attributes);
+        $result =  (bool)openssl_verify(urldecode(http_build_query($attributes)), $sign, $pubKey);
+        openssl_free_key($pubKey);
+        return $result;
     }
 }
 if (! function_exists('get_client_ip'))
