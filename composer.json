@@ -38,6 +38,9 @@
   "autoload": {
     "psr-4": {
       "EaseBaidu\\": "src/"
-    }
+    },
+    "files": [
+        "src/Kernel/Support/Helpers.php"
+    ]
   }
 }
