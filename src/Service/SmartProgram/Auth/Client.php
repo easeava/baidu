@@ -32,9 +32,8 @@ class Client extends BaseClient
         $params = [
             'code' => $code,
             'client_id' => $this->app['config']['app_key'],
-            'sk' => $this->app['app_secret']
+            'sk' => $this->app['config']['secret'],
         ];
-
-        return $this->httpPostJson('/nalogin/getSessionKeyByCode', $params);
+        return $this->httpPost('/nalogin/getSessionKeyByCode', $params);
     }
 }
