@@ -15,6 +15,7 @@ use EaseBaidu\Kernel\Exceptions\RuntimeException;
 use EaseBaidu\Kernel\BaseClient;
 use EaseBaidu\Kernel\Support\Str;
 use EaseBaidu\Kernel\Traits\InteractsWithCache;
+use EaseBaidu\Kernel\Support;
 
 class Client extends BaseClient
 {
@@ -139,7 +140,7 @@ class Client extends BaseClient
             return $this->url;
         }
 
-        return current_url();
+        return Support\current_url();
     }
 
     /**
