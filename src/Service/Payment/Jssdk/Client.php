@@ -8,7 +8,6 @@
 
 namespace EaseBaidu\Service\Payment\Jssdk;
 
-use EaseBaidu\Kernel\Support;
 use EaseBaidu\Kernel\Container;
 use EaseBaidu\Kernel\BaseClient;
 use EaseBaidu\Kernel\Contracts\AccessTokenInterface;
@@ -49,7 +48,7 @@ class Client extends BaseClient
             'tpOrderId' => $tpOrderId,
             'totalAmount' => $totalAmount
         ];
-        $sign = Support\generate_sign_with_rsa($params,$this->app['config']['privateKey']);
+        $sign = generate_sign_with_rsa($params,$this->app['config']['privateKey']);
         return array_merge($params, [
             'dealTitle'       => $deadTitle,
             'signFieldsRange' => 1,

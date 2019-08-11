@@ -40,7 +40,7 @@
       "EaseBaidu\\": "src/"
     },
     "files": [
-        "src/Kernel/Support/Helpers.php"
+        "src/helpers.php"
     ]
   }
 }
