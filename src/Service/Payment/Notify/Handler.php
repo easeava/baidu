@@ -192,7 +192,7 @@ abstract class Handler
      */
     protected function validate(array $message)
     {
-        if (!validate_sign_with_rsa($message, $this->app['config']['publicKey'])) {
+        if (!validate_sign_with_rsa($message, $this->app['config']['public_key'])) {
             throw new BaiduInvalidSignException();
         }
         return true;

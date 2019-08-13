@@ -43,12 +43,12 @@ class Client extends BaseClient
     public function sdkConfig(int $totalAmount, string $tpOrderId, string $dealTitle, array $bizInfo= null): array
     {
         $params = [
-            'appKey' => $this->app['config']['appKey'],
-            'dealId' => $this->app['config']['dealId'],
+            'appKey' => $this->app['config']['app_key'],
+            'dealId' => $this->app['config']['deal_id'],
             'tpOrderId' => $tpOrderId,
             'totalAmount' => $totalAmount
         ];
-        $sign = generate_sign_with_rsa($params,$this->app['config']['privateKey']);
+        $sign = generate_sign_with_rsa($params,$this->app['config']['private_key']);
         return array_merge($params, [
             'dealTitle'       => $dealTitle,
             'signFieldsRange' => 1,
