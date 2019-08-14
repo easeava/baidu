@@ -23,6 +23,26 @@ class Client extends BaseClient
     const API_SEND = '/rest/2.0/smartapp/template/send';
 
     /**
+     * @var array
+     */
+    protected $message = [
+        'template_id' => '',
+        'data' => [],
+        'scene_id' => '',
+        'scene_type' => '',
+    ];
+
+    /**
+     * @var array
+     */
+    protected $required = [
+        'template_id',
+        'data',
+        'scene_id',
+        'scene_type',
+    ];
+
+    /**
      * Get template library list.
      *
      * @param int $offset
