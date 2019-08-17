@@ -11,6 +11,14 @@ namespace EaseBaidu;
 
 use Illuminate\Support\Str;
 
+/**
+ * Class Factory.
+ *
+ * @method static \EaseBaidu\Service\Bear\Application               bear(array $config)
+ * @method static \EaseBaidu\Service\BearTP\Application             bearTP(array $config)
+ * @method static \EaseBaidu\Service\Payment\Application            payment(array $config)
+ * @method static \EaseBaidu\Service\SmartProgram\Application       smartProgram(array $config)
+ */
 class Factory
 {
     /**
