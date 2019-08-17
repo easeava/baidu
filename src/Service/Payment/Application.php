@@ -3,6 +3,7 @@
 /**
  * EaseBaidu - A PHP Framework For Baidu SDK
  *
+ * @package  Easeava/baidu
  * @author   Easeava <tthd@163.com>
  */
 

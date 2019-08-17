@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Easeava package.
  *
@@ -7,7 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 use Illuminate\Support\Str;
+
 if (! function_exists('generate_sign'))
 {
     /**
@@ -26,6 +29,7 @@ if (! function_exists('generate_sign'))
         return strtoupper(call_user_func_array($encryptMethod, [urldecode(http_build_query($attributes))]));
     }
 }
+
 if (! function_exists('generate_sign_with_rsa'))
 {
     /**
@@ -47,6 +51,7 @@ if (! function_exists('generate_sign_with_rsa'))
         return base64_encode($sign);
     }
 }
+
 if (! function_exists('validate_sign_with_rsa'))
 {
     /**
@@ -75,6 +80,7 @@ if (! function_exists('validate_sign_with_rsa'))
         return $result;
     }
 }
+
 if (! function_exists('get_client_ip'))
 {
     /**
@@ -93,6 +99,7 @@ if (! function_exists('get_client_ip'))
         return filter_var($ip, FILTER_VALIDATE_IP) ?: '127.0.0.1';
     }
 }
+
 if (! function_exists('get_server_ip'))
 {
     /**
@@ -113,6 +120,7 @@ if (! function_exists('get_server_ip'))
         return filter_var($ip, FILTER_VALIDATE_IP) ?: '127.0.0.1';
     }
 }
+
 if (! function_exists('current_url'))
 {
     /**
@@ -129,6 +137,7 @@ if (! function_exists('current_url'))
         return $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     }
 }
+
 if (! function_exists('str_random'))
 {
     /**
@@ -143,6 +152,7 @@ if (! function_exists('str_random'))
         return Str::random($length);
     }
 }
+
 if (! function_exists('rsa_public_encrypt'))
 {
     /**
