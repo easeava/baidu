@@ -25,7 +25,9 @@ if (! function_exists('generate_sign'))
     function generate_sign(array $attributes, $key, $encryptMethod = 'md5')
     {
         ksort($attributes);
+
         $attributes['key'] = $key;
+
         return strtoupper(call_user_func_array($encryptMethod, [urldecode(http_build_query($attributes))]));
     }
 }
@@ -47,7 +49,6 @@ if (! function_exists('generate_sign_with_rsa'))
         ksort($attributes);
         openssl_sign(urldecode(http_build_query($attributes)), $sign, $priKey);
         openssl_free_key($priKey);
-
         return base64_encode($sign);
     }
 }
@@ -96,6 +97,7 @@ if (! function_exists('get_client_ip'))
             // for php-cli(phpunit etc.)
             $ip = defined('PHPUNIT_RUNNING') ? '127.0.0.1' : gethostbyname(gethostname());
         }
+
         return filter_var($ip, FILTER_VALIDATE_IP) ?: '127.0.0.1';
     }
 }
@@ -117,6 +119,7 @@ if (! function_exists('get_server_ip'))
             // for php-cli(phpunit etc.)
             $ip = defined('PHPUNIT_RUNNING') ? '127.0.0.1' : gethostbyname(gethostname());
         }
+
         return filter_var($ip, FILTER_VALIDATE_IP) ?: '127.0.0.1';
     }
 }
@@ -131,9 +134,11 @@ if (! function_exists('current_url'))
     function current_url()
     {
         $protocol = 'http://';
+
         if ((! empty($_SERVER['HTTPS']) && 'off' !== $_SERVER['HTTPS']) || ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? 'http') === 'https') {
             $protocol = 'https://';
         }
+
         return $protocol.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     }
 }
@@ -165,6 +170,7 @@ if (! function_exists('rsa_public_encrypt'))
     {
         $encrypted = '';
         openssl_public_encrypt($content, $encrypted, openssl_pkey_get_public($publicKey), OPENSSL_PKCS1_OAEP_PADDING);
+
         return base64_encode($encrypted);
     }
 }
